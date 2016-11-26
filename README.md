@@ -1,5 +1,7 @@
 # terraform
 
+[![Build Status](https://travis-ci.org/kostyrevaa/ansible-role-terraform.svg?branch=master)](https://travis-ci.org/kostyrevaa/ansible-role-terraform)
+
 Installs Terraform
 
 Requirements
