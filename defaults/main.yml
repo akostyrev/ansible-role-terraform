@@ -1,0 +1,10 @@
+---
+
+terraform_bin_dir: /usr/local/bin     # dir to extract terraform binary
+terraform_checksum_file:     "terraform_{{ terraform_version }}_SHA256SUMS"
+terraform_checksum_file_url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/{{ terraform_checksum_file }}"
+terraform_download_dir: "{{ lookup('env','HOME') }}/Downloads"  # path to download terraform zip file before extraction
+terraform_validate_certs: true
+terraform_version: 0.7.13
+terraform_zip: terraform_{{ terraform_version }}_linux_amd64.zip
+terraform_zip_url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/{{ terraform_zip }}

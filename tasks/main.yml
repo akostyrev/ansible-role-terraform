@@ -1,0 +1,51 @@
+---
+
+- name: update apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian'
+
+- name: install unzip
+  package:
+    name: unzip
+    state: present
+
+- name: Get terraform package checksum file
+  get_url:
+    url: "{{ terraform_checksum_file_url }}"
+    dest: "{{ terraform_download_dir }}"
+    validate_certs: "{{ terraform_validate_certs }}"
+
+- name: Get checksum of terraform zip
+  shell: "grep {{ terraform_zip }} {{ terraform_download_dir }}/{{ terraform_checksum_file }}"
+  register: chksum
+  changed_when: False
+
+- name: download terraform zip
+  get_url:
+    url: "{{ terraform_zip_url }}"
+    dest: "{{ terraform_download_dir }}/{{ terraform_zip }}"
+    checksum: "sha256:{{ chksum.stdout.split(' ')|first }}"
+    validate_certs: "{{ terraform_validate_certs }}"
+
+- name: create terraform binary directory
+  file:
+    state: directory
+    path: "{{ terraform_bin_dir }}/terraform-{{ terraform_version }}"
+    owner: 0
+    group: 0
+    recurse: yes
+
+- name: extract terraform zip
+  unarchive:
+    src: "{{ terraform_download_dir }}/{{ terraform_zip }}"
+    dest: "{{ terraform_bin_dir }}/terraform-{{ terraform_version }}"
+    copy: no
+    creates: "{{ terraform_bin_dir }}/terraform-{{ terraform_version }}/terraform"
+
+- name: symlink terraform binary
+  file:
+    state: link
+    src: "{{ terraform_bin_dir }}/terraform-{{ terraform_version }}/terraform"
+    dest: "{{ terraform_bin_dir }}/terraform"

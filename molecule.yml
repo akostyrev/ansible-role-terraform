@@ -1,0 +1,27 @@
+---
+molecule:
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - idempotence
+
+driver:
+  name: docker
+
+docker:
+  containers:
+
+    - name: ubuntu-terraform
+      image: ubuntu
+      image_version: latest
+
+    - name: fedora-terraform
+      image: fedora
+      image_version: latest
+      command: /bin/bash
+
+verifier:
+  name: testinfra
