@@ -21,6 +21,8 @@
   shell: "grep {{ terraform_zip }} {{ terraform_download_dir }}/{{ terraform_checksum_file }}"
   register: chksum
   changed_when: False
+  tags:
+    - skip_ansible_lint
 
 - name: download terraform zip
   get_url:
