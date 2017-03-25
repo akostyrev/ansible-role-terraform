@@ -18,8 +18,6 @@ variables used in this role.
 Example Playbook
 ----------------
 
-TODO: Add example playbook(s).
-
 ```yaml
 ---
 - hosts: localhost
