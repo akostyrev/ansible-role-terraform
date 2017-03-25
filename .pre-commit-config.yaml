@@ -15,4 +15,8 @@
   hooks:
     - id: ansible-lint
       files: \.(yaml|yml)$
-      args: ["--exclude=roles", "--exclude=basic/roles"]
+      args: [
+        "--exclude=roles",
+        "--exclude=basic/roles",
+        "--exclude=.travis.yml"
+      ]
