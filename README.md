@@ -32,7 +32,7 @@ Install From Github
 
 ```
 git clone https://github.com/akostyrev/ansible-role-terraform.git akostyrev.terraform
-cd akostyrev.vagrant && make install
+cd akostyrev.terraform && make install
 ```
 
 License
