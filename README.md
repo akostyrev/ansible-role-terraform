@@ -25,7 +25,7 @@ Example Playbook
   vars:
     terraform_verion: 0.7.13
   roles:
-    - kostyrevaa.terraform
+    - akostyrev.terraform
 
 ```
 

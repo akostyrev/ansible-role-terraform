@@ -1,15 +1,8 @@
 ---
 
-- hosts: fedora-terraform
-  gather_facts: false
-  tasks:
-    - name: install packages for ansible support
-      raw: dnf -y install python2-dnf
-      changed_when: False
-
 - hosts: all
   vars:
     terraform_validate_certs: false
     terraform_download_dir: /root
   roles:
-    - role: kostyrevaa.terraform
+    - role: akostyrev.terraform

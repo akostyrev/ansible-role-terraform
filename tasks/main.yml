@@ -1,5 +1,11 @@
 ---
 
+- name: install python2-dnf for ansible
+  become: yes
+  raw: dnf -y install python2-dnf
+  changed_when: False
+  when: ansible_pkg_mgr == 'dnf'
+
 - name: update apt
   apt:
     update_cache: yes
@@ -11,11 +17,44 @@
     name: unzip
     state: present
 
-- name: Get terraform package checksum file
+- block:
+    - name: download hashicorp gpg key file from keybase
+      get_url:
+        url: https://keybase.io/hashicorp/key.asc
+        dest: "{{ terraform_download_dir }}/hashicorp.asc"
+        validate_certs: "{{ terraform_validate_certs }}"
+
+    - name: install gnupg package
+      become: yes
+      package:
+        name: gnupg
+        state: present
+
+    - name: import hashicorp gpg key
+      command: gpg --import "{{ terraform_download_dir }}/hashicorp.asc"
+      changed_when: no
+
+    - name: download terraform checksum signature file
+      get_url:
+        url: "{{ terraform_signature_url }}"
+        dest: "{{ terraform_download_dir }}/{{ terraform_signature_file }}"
+        validate_certs: "{{ terraform_validate_certs }}"
+        force: yes
+  when: terraform_verify_checksum_signature
+
+- name: Get terraform checksum file
   get_url:
     url: "{{ terraform_checksum_file_url }}"
     dest: "{{ terraform_download_dir }}"
     validate_certs: "{{ terraform_validate_certs }}"
+
+- name: verify checksum file
+  command: gpg --batch --verify {{ terraform_download_dir }}/{{ terraform_signature_file }} {{ terraform_download_dir }}/{{ terraform_checksum_file }}
+  changed_when: no
+  register: gpg_check
+  when: terraform_verify_checksum_signature
+  failed_when: gpg_check.rc == 1
+  tags: gpg_check
 
 - name: Get checksum of terraform zip
   shell: "grep {{ terraform_zip }} {{ terraform_download_dir }}/{{ terraform_checksum_file }}"

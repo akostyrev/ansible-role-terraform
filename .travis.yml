@@ -12,11 +12,12 @@ before_install:
 
 install:
 - pip install ansible==2.2.1.0
+- pip install ansible-lint
 - pip install docker-py
 - pip install molecule==1.20.3
 
 script:
-- cd ../ && mv ansible-role-terraform kostyrevaa.terraform && cd kostyrevaa.terraform
+- cd ../ && mv ansible-role-terraform akostyrev.terraform && cd akostyrev.terraform
 - molecule test
 
 notifications:
