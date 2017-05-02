@@ -3,5 +3,5 @@
 - hosts: all
   any_errors_fatal: true
   roles:
-    - role: akostyrev.terraform
+    - role: kostyrev.terraform
       terraform_validate_certs: "{{ false if ansible_virtualization_type == 'docker' else true }}"

@@ -17,7 +17,7 @@ install:
 - pip install molecule==1.20.3
 
 script:
-- cd ../ && mv ansible-role-terraform akostyrev.terraform && cd akostyrev.terraform
+- cd ../ && mv ansible-role-terraform kostyrev.terraform && cd kostyrev.terraform
 - molecule test
 
 notifications:

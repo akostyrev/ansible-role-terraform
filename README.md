@@ -1,6 +1,6 @@
 # terraform
 
-[![Build Status](https://travis-ci.org/akostyrev/ansible-role-terraform.svg?branch=master)](https://travis-ci.org/akostyrev/ansible-role-terraform)
+[![Build Status](https://travis-ci.org/kostyrev/ansible-role-terraform.svg?branch=master)](https://travis-ci.org/kostyrev/ansible-role-terraform)
 
 Installs Terraform
 
@@ -23,7 +23,7 @@ Example Playbook
 - hosts: localhost
   connection: local
   roles:
-    - akostyrev.terraform
+    - kostyrev.terraform
 
 ```
 
@@ -31,8 +31,8 @@ Install From Github
 -------------------
 
 ```
-git clone https://github.com/akostyrev/ansible-role-terraform.git akostyrev.terraform
-cd akostyrev.terraform && make install
+git clone https://github.com/kostyrev/ansible-role-terraform.git kostyrev.terraform
+cd kostyrev.terraform && make install
 ```
 
 License
