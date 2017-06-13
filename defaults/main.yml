@@ -8,6 +8,6 @@ terraform_validate_certs: true
 terraform_verify_checksum_signature: true
 terraform_signature_file: "{{ terraform_checksum_file }}.sig"
 terraform_signature_url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/{{ terraform_signature_file }}"
-terraform_version: 0.9.5
+terraform_version: 0.9.8
 terraform_zip: terraform_{{ terraform_version }}_linux_amd64.zip
 terraform_zip_url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/{{ terraform_zip }}
