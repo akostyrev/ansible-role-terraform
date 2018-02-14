@@ -12,3 +12,6 @@ lint:
 
 install:
 	ansible-playbook -i "localhost," playbook.yml --diff -c local
+
+install-version:
+	ansible-playbook -i "localhost," playbook.yml --diff -c local -e 'terraform_version=$(version)'
